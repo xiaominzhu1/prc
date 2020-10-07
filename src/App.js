@@ -4,6 +4,8 @@ import { Switch, BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Insert from "./components/Insert.js";
 import Main from "./components/Main.js";
 
+export const ThemeContext = React.createContext();
+
 function App() {
   const [data, setData] = useState({});
   const [name, setName] = useState("");
@@ -12,6 +14,8 @@ function App() {
   const [content, setContent] = useState([]);
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
+
+  const [color, setColor] = useState("yellow");
 
   // Main page
   // get inserted constant data from server
@@ -58,6 +62,7 @@ function App() {
         setContent([...data.ops, ...content]); // render all content
         setTitle("");
         setText("");
+        setColor("pink");
       })
 
       .catch((e) => console.log("error,", e));
@@ -89,14 +94,16 @@ function App() {
             />
           </Route>
           <Route path="/posts">
-            <Insert
-              title={title}
-              text={text}
-              changeTitle={(e) => setTitle(e.target.value)}
-              changeText={(e) => setText(e.target.value)}
-              content={content}
-              sendData={sendData}
-            />
+            <ThemeContext.Provider value={color}>
+              <Insert
+                title={title}
+                text={text}
+                changeTitle={(e) => setTitle(e.target.value)}
+                changeText={(e) => setText(e.target.value)}
+                content={content}
+                sendData={sendData}
+              />
+            </ThemeContext.Provider>
           </Route>
         </Switch>
       </div>

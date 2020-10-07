@@ -1,5 +1,6 @@
 import React from "react";
 import Info from "./Info.js";
+//import { ThemeContext } from "../App";
 import { useHistory } from "react-router-dom";
 
 const Content = ({ content }) => {

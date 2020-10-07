@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ThemeContext } from "../App";
 import Content from "./Content.js";
 
 const Insert = ({
@@ -9,6 +10,7 @@ const Insert = ({
   content,
   sendData,
 }) => {
+  const bgColor = useContext(ThemeContext); // initial 'yellow'
   return (
     <div>
       <form id="postData">
@@ -25,7 +27,12 @@ const Insert = ({
           placeholder="text"
         />
 
-        <button onClick={sendData}>Save to DB</button>
+        <button
+          onClick={sendData} // also change initial Color to 'pink'
+          style={{ backgroundColor: !title && !text ? bgColor : "lightblue" }}
+        >
+          Save to DB
+        </button>
       </form>
 
       <div>
