@@ -1,10 +1,14 @@
 import React from "react";
 import Info from "./Info.js";
-import { useHistory, Link, Switch, Route } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const Content = ({ content }) => {
   const [type, setType] = React.useState(0);
   const history = useHistory();
+
+  function back() {
+    setType(0);
+  }
 
   return (
     <div>
@@ -20,19 +24,12 @@ const Content = ({ content }) => {
                   setType(1);
                 }}
               >
-                <Link to={path}>
-                  Title:{item.title} Text: {item.text}
-                </Link>
-                <Switch>
-                  <Route path={path}>
-                    <Info content={content} />
-                  </Route>
-                </Switch>
+                Title:{item.title} Text: {item.text}
               </li>
             );
           })
         ) : (
-          <Info content={content} />
+          <Info content={content} back={back} />
         )}
       </ul>
     </div>
